@@ -1,5 +1,5 @@
 from django.contrib import admin
-from django.urls import path, include, re_path
+from django.urls import path, include
 
 # from django.views.generic import TemplateView
 
@@ -9,5 +9,6 @@ urlpatterns = [
     path("users/", include("src.users.urls", namespace="users")),
     path("news/", include("src.news.urls", namespace="news")),
     path("articles/", include("src.articles.urls", namespace="articles")),
+    path("questions/", include("src.questions.urls", namespace="questions")),
     # path(r"accounts/", include("allauth.urls")),
 ]

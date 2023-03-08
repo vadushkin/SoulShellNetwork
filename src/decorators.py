@@ -1,7 +1,9 @@
+from typing import Callable
+
 from django.http import HttpResponseBadRequest
 
 
-def ajax_required(function):
+def ajax_required(function: Callable) -> Callable:
     """Decorator to validate than a request is AJAX"""
 
     def wrap(request, *args, **kwargs):
