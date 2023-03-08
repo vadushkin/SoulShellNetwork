@@ -1,31 +1,3 @@
 {% for reply in thread %}
-  <li class="card" news-id="{{ reply.uuid_id }}">
-    <div class="card-body">
-      <div class="profile-picture">
-      </div>
-      <div class="post">
-        {% if reply.user == request.user %}
-          <a href="{% url 'news:delete_news' reply.pk %}">
-            <i class="fa fa-times pull-right" aria-hidden="true" title=""></i>
-          </a>
-        {% endif %}
-        <p>
-          <strong>
-            <a href="{% url 'users:detail' reply.user.username  %}">{{ reply.user.get_profile_name|title }}</a>
-          </strong>
-        </p>
-        <div class="interaction" id="interaction">
-          <a href="#" class="like" title="{% for i in news.get_likers %}{{ i }}&#10;{% endfor %}">
-            {% if request.user in news.get_likers %}
-              <i class="heart fa fa-heart" aria-hidden="true"></i>
-            {% else %}
-              <i class="heart fa fa-heart-o" aria-hidden="true"></i>
-            {% endif %}
-            <span class="like-count">{{ news.count_likers }}</span>
-          </a>
-
-        </div>
-      </div>
-    </div>
-  </li>
+    {{ reply|urlize }}
 {% endfor %}

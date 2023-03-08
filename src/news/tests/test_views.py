@@ -74,6 +74,19 @@ class NewsViewsTest(TestCase):
         assert self.user in self.first_news.get_likers()
         assert response.json()["likes"] == 1
 
+    def test_thread(self):
+        response = self.client.get(
+            reverse("news:get_thread"),
+            {"news": self.first_news.pk},
+            HTTP_X_REQUESTED_WITH="XMLHttpRequest",
+        )
+        print(response.json())
+        assert response.status_code == 200
+        assert response.json()["uuid"] == str(self.first_news.pk)
+
+        assert "This is the first" in response.json()["news"]
+        assert "This is an answer to the first" in response.json()["thread"]
+
     def test_posting_comments(self):
         response = self.client.post(
             reverse("news:post_comments"),
@@ -122,5 +135,6 @@ class NewsViewsTest(TestCase):
         assert second_response.status_code == 200
         assert third_response.status_code == 200
         assert fourth_response.status_code == 200
+
         assert fourth_response.json()["likes"] == 2
         assert fourth_response.json()["comments"] == 2
