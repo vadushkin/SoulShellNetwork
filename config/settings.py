@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'src.users.apps.UsersConfig',
     'src.articles.apps.ArticlesConfig',
     'src.questions.apps.QuestionsConfig',
+    'src.news.apps.NewsConfig',
 
     # libraries
     "markdownx",
@@ -110,6 +111,7 @@ STATICFILES_DIRS = [
 ]
 
 AUTH_USER_MODEL = "users.User"
+# LOGIN_REDIRECT_URL = "news:list"
 # LOGIN_URL = "account_login"
 
 # ACCOUNT_ADAPTER = "src.users.adapters.AccountAdapter"
