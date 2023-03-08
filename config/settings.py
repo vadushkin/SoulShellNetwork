@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     # applications
     'src.users.apps.UsersConfig',
     'src.articles.apps.ArticlesConfig',
+    'src.questions.apps.QuestionsConfig',
 
     # libraries
     "markdownx",
