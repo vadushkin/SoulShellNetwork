@@ -5,7 +5,7 @@ from django.views.generic import CreateView, ListView, UpdateView, DetailView
 
 from src.articles.forms import ArticleForm
 from src.articles.models import Article
-from src.help_functions import AuthorRequiredMixin
+from src.mixins import AuthorRequiredMixin
 
 
 class ArticlesListView(LoginRequiredMixin, ListView):

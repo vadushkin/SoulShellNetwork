@@ -47,6 +47,8 @@ class ArticlesModelsTest(TestCase):
 
     def test_change_draft_title(self):
         assert self.not_p_article.title == "Astonishing title"
+
         self.not_p_article.title = "Specific changed title"
         self.not_p_article.save()
+
         assert self.not_p_article.title == "Specific changed title"

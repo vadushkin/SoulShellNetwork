@@ -7,7 +7,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.10"
-django = "^4.1.7"
+django = "3.2"
 python-dotenv = "^1.0.0"
 cloudinary = "1.31.0"
 pillow = "9.4.0"
@@ -15,10 +15,10 @@ pytest = "^7.2.2"
 pytest-django = "^4.5.2"
 pytest-sugar = "^0.9.6"
 pytest-cov = "^4.0.0"
-django-test-plus = "^2.2.1"
+django-test-plus = "2.2.1"
 django-markdownx = "^3.0.1"
 python-slugify = "^8.0.1"
-django-taggit = "^3.1.0"
+django-taggit = "3.1.0"
 
 
 [build-system]

@@ -1,5 +1,5 @@
 from django.core.exceptions import PermissionDenied
-from django.views.generic import View
+from django.views import View
 
 
 class AuthorRequiredMixin(View):
