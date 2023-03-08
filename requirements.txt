@@ -1,4 +1,4 @@
-django==4.1.7
+django==3.2
 python-dotenv==1.0.0
 cloudinary==1.31.0
 pillow==9.4.0
