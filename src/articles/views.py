@@ -38,7 +38,7 @@ class CreateArticleView(LoginRequiredMixin, CreateView):
     model = Article
     message = "Your article has been created."
     form_class = ArticleForm
-    # template_name = "articles/article_create.html"
+    template_name = "articles/article_create.html"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
@@ -55,7 +55,7 @@ class EditArticleView(LoginRequiredMixin, AuthorRequiredMixin, UpdateView):
     model = Article
     message = "Your article has been updated."
     form_class = ArticleForm
-    # template_name = "articles/article_update.html"
+    template_name = "articles/article_update.html"
 
     def form_valid(self, form):
         form.instance.user = self.request.user
