@@ -28,8 +28,11 @@ INSTALLED_APPS = [
 
     # applications
     'src.users.apps.UsersConfig',
+    'src.articles.apps.ArticlesConfig',
 
     # libraries
+    "markdownx",
+    "taggit",
     # "crispy_forms",
     # "sorl.thumbnail",
     # "allauth",
