@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'src.users.apps.UsersConfig',
     'src.articles.apps.ArticlesConfig',
     'src.questions.apps.QuestionsConfig',
+    'src.messenger.apps.MessengerConfig',
     'src.news.apps.NewsConfig',
 
     # libraries

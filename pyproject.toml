@@ -19,6 +19,7 @@ django-test-plus = "2.2.1"
 django-markdownx = "^3.0.1"
 python-slugify = "^8.0.1"
 django-taggit = "3.1.0"
+channels = "^4.0.0"
 
 
 [build-system]
