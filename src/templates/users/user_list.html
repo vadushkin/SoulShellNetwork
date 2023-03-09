@@ -1,0 +1,11 @@
+{% for user in user_list %}
+    {{ user.get_profile_name|title }}
+
+    {% if user.job_title %}
+        {{ user.job_title }}
+    {% endif %}
+
+    {% if user.location %}
+        {{ user.location }}
+    {% endif %}
+{% endfor %}

@@ -1,3 +1,9 @@
 from django.contrib import admin
 
-# Register your models here.
+from src.messenger.models import Message
+
+
+@admin.register(Message)
+class MessageAdmin(admin.ModelAdmin):
+    list_display = ("sender", "recipient", "timestamp")
+    list_filter = ("sender", "recipient")
