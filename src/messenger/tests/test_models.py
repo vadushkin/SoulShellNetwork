@@ -1,21 +1,27 @@
+from test_plus.plugin import TestCase
+
 from src.messenger.models import Message
-from test_plus.test import TestCase
 
 
 class MessengerModelsTest(TestCase):
     def setUp(self):
         self.user = self.make_user("test_user")
         self.other_user = self.make_user("other_test_user")
+
         self.first_message = Message.objects.create(
             sender=self.user,
             recipient=self.other_user,
             message="A not that long message.",
         )
         self.second_message = Message.objects.create(
-            sender=self.user, recipient=self.other_user, message="A follow up message."
+            sender=self.user,
+            recipient=self.other_user,
+            message="A follow up message."
         )
         self.third_message = Message.objects.create(
-            sender=self.other_user, recipient=self.user, message="An answer message."
+            sender=self.other_user,
+            recipient=self.user,
+            message="An answer message."
         )
 
     def test_object_instance(self):

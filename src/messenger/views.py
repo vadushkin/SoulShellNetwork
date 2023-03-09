@@ -3,7 +3,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin
 # from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView
 
@@ -78,11 +78,16 @@ def receive_message(request):
     receiver side providing realtime connections."""
     message_id = request.GET.get("message_id")
 
-    message = get_object_or_404(Message, pk=message_id)
+    # message = get_object_or_404(Message, pk=message_id)
 
     # try:
     #     message = Message.objects.get(pk=message_id)
     # except ObjectDoesNotExist as _ex:
     #     raise _ex
+
+    try:
+        message = Message.objects.get(pk=message_id)
+    except Message.DoesNotExist as _ex:
+        raise _ex
 
     return render(request, "messager/single_message.html", {"message": message})

@@ -1,0 +1,5 @@
+{% if message_list %}
+    {% for message in message_list %}
+        {% include 'messager/single_message.html' with message=message %}
+    {% endfor %}
+{% endif %}
