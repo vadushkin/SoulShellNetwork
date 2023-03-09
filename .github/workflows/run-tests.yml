@@ -10,25 +10,27 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    # PostgreSQL
-#    services:
-#      postgres:
-#        # Docker image
-#        image: postgres
-#        # Environment variables
-#        env:
-#          POSTGRES_DB: ${{ secrets.POSTGRES_NAME }}
-#          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
-#          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-#        # Ports
-#        ports:
-#          - 5432:5432
-#        # Options for PostgreSQL
-#        options: >-
-#          --health-cmd pg_isready
-#          --health-interval 10s
-#          --health-timeout 5s
-#          --health-retries 5
+    # PostgresSQL
+    services:
+      postgres:
+        # Docker image
+        image: postgres
+        # Environment variables
+        env:
+          POSTGRES_NAME: ${{ secrets.POSTGRES_NAME }}
+          POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
+          POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
+          DB_HOST: ${{ secrets.DB_HOST }}
+          DB_PORT: ${{ secrets.DB_PORT }}
+        # Ports
+        ports:
+          - ${{ secrets.DB_PORT }}:5432
+        # Options for PostgresSQL
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v2
       # Install Python
@@ -61,6 +63,12 @@ jobs:
           echo EMAIL_HOST_PASSWORD='${{ secrets.EMAIL_HOST_PASSWORD }}' >> .env
           echo EMAIL_USE_TLS='${{ secrets.EMAIL_USE_TLS }}' >> .env
           echo EMAIL_USE_SSL='${{ secrets.EMAIL_USE_SSL }}' >> .env
+          
+          echo POSTGRES_NAME='${{ secrets.POSTGRES_NAME }}' >> .env
+          echo POSTGRES_USER='${{ secrets.POSTGRES_USER }}' >> .env
+          echo POSTGRES_PASSWORD='${{ secrets.POSTGRES_PASSWORD }}' >> .env
+          echo DB_HOST='${{ secrets.DB_HOST }}' >> .env
+          echo DB_PORT='${{ secrets.DB_PORT }}' >> .env
           
           echo CLOUDINARY_NAME='${{ secrets.CLOUDINARY_NAME }}' >> .env
           echo CLOUDINARY_API_KEY='${{ secrets.CLOUDINARY_API_KEY }}' >> .env
