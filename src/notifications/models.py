@@ -9,8 +9,6 @@ from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from slugify import slugify
 
-from src.users.models import User
-
 
 class NotificationQuerySet(models.query.QuerySet):
     def unread(self):
@@ -211,12 +209,7 @@ def notification_handler(
         )
 
 
-def notification_broadcast(
-        actor,
-        key,
-        id_value=None,
-        recipient=None,
-):
+def notification_broadcast(actor, key, id_value=None, recipient=None):
     """Notification handler to broadcast calls to
     the reception layer of the WebSocket consumer of this app."""
 

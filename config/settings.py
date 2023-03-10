@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
 
     # applications
     'src.users.apps.UsersConfig',
@@ -36,6 +37,8 @@ INSTALLED_APPS = [
     'src.news.apps.NewsConfig',
 
     # libraries
+    "channels",
+    "django_comments",
     "markdownx",
     "taggit",
     # "crispy_forms",
@@ -155,3 +158,16 @@ cloudinary.config(
     api_secret=os.getenv("CLOUDINARY_API_SECRET"),
     secure=True,
 )
+
+SITE_ID = 1
+
+REDIS_URL = f'{os.getenv("REDIS_URL", default="redis://127.0.0.1:6379")}/{0}'
+
+CHANNEL_LAYERS = {
+    "default": {
+        "BACKEND": "channels_redis.core.RedisChannelLayer",
+        "CONFIG": {
+            "hosts": [REDIS_URL],
+        },
+    }
+}
