@@ -2,12 +2,13 @@ from cloudinary.models import CloudinaryField
 from django.conf import settings
 from django.db import models
 from django.db.models import Count
+from django_comments.signals import comment_was_posted
 from markdownx.models import MarkdownxField
 from markdownx.utils import markdownify
-
 from slugify import slugify
-
 from taggit.managers import TaggableManager
+
+from src.notifications.models import notification_handler, Notification
 
 
 class ArticleQuerySet(models.query.QuerySet):
@@ -73,3 +74,19 @@ class Article(models.Model):
 
     def get_markdown(self):
         return markdownify(self.content)
+
+
+def notify_comment(**kwargs):
+    actor = kwargs["request"].user
+    receiver = kwargs["comment"].content_object.user
+    obj = kwargs["comment"].content_object
+
+    notification_handler(
+        actor,
+        receiver,
+        Notification.COMMENTED,
+        action_object=obj,
+    )
+
+
+comment_was_posted.connect(receiver=notify_comment)

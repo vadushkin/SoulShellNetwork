@@ -166,12 +166,12 @@ class Notification(models.Model):
 
 
 def notification_handler(
-        actor: User,
-        recipient: User,
-        verb: Notification.verb,
-        key: str = "notification",
-        id_value: uuid.UUID = None,
-        action_object: Notification.action_object = None,
+        actor,
+        recipient,
+        verb,
+        key="notification",
+        id_value=None,
+        action_object=None,
 ):
     """Handler function to create a Notification instance."""
 
@@ -212,8 +212,8 @@ def notification_handler(
 
 
 def notification_broadcast(
-        actor: User,
-        key: str,
+        actor,
+        key,
         id_value=None,
         recipient=None,
 ):

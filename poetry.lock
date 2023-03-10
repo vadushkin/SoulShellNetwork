@@ -183,6 +183,21 @@ argon2 = ["argon2-cffi (>=19.1.0)"]
 bcrypt = ["bcrypt"]
 
 [[package]]
+name = "django-contrib-comments"
+version = "2.2.0"
+description = "The code formerly known as django.contrib.comments."
+category = "main"
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-contrib-comments-2.2.0.tar.gz", hash = "sha256:48de00f15677e016a216aeff205d6e00e4391c9a5702136c64119c472b7356da"},
+    {file = "django_contrib_comments-2.2.0-py3-none-any.whl", hash = "sha256:2ca79060bbc8fc5b636981ef6e50f35ab83649af75fc1be47bf770636be3271c"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+
+[[package]]
 name = "django-markdownx"
 version = "3.0.1"
 description = "A comprehensive Markdown editor built for Django."
@@ -695,4 +710,4 @@ socks = ["PySocks (>=1.5.6,!=1.5.7,<2.0)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "f012484a36e6082c24dbbbd5c23ab5557cf9c8771e22d3e456c18669a6e39f27"
+content-hash = "e79d607ff069d5bd793187fb9206b2eb052eb05166c9b3e0e8d643a163a2a0b6"

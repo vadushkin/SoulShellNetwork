@@ -3,6 +3,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.urls import reverse
 
+from src.notifications.models import notification_handler, Notification
+
 
 class User(AbstractUser):
     name = models.CharField("User's name", blank=True, max_length=255)
@@ -45,3 +47,13 @@ class User(AbstractUser):
             return self.name
 
         return self.username
+
+
+def broadcast_login(sender, user, request, **kwargs):
+    """Handler to be fired up upon user login signal to notify all users."""
+    notification_handler(user, "global", Notification.LOGGED_IN)
+
+
+def broadcast_logout(sender, user, request, **kwargs):
+    """Handler to be fired up upon user logout signal to notify all users."""
+    notification_handler(user, "global", Notification.LOGGED_OUT)

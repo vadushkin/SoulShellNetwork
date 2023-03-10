@@ -1,8 +1,12 @@
 import uuid
 
+from asgiref.sync import async_to_sync
+from channels.layers import get_channel_layer
 from django.conf import settings
 from django.db import models
 from django.urls import reverse
+
+from src.notifications.models import notification_handler, Notification
 
 
 class News(models.Model):
@@ -29,10 +33,17 @@ class News(models.Model):
     reply = models.BooleanField(verbose_name="Is a reply?", default=False)
     timestamp = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        verbose_name = "News"
-        verbose_name_plural = "News"
-        ordering = ("-timestamp",)
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        if not self.reply:
+            channel_layer = get_channel_layer()
+            payload = {
+                "type": "receive",
+                "key": "additional_news",
+                "actor_name": self.user.username,
+            }
+            async_to_sync(channel_layer.group_send)("notifications", payload)
 
     def __str__(self):
         return str(self.content)
@@ -54,8 +65,19 @@ class News(models.Model):
 
     def reply_this(self, user, text):
         parent = self.get_parent()
-        News.objects.create(
-            user=user, content=text, reply=True, parent=parent
+        reply_news = News.objects.create(
+            user=user,
+            content=text,
+            reply=True,
+            parent=parent,
+        )
+        notification_handler(
+            user,
+            parent.user,
+            Notification.REPLY,
+            action_object=reply_news,
+            id_value=str(parent.uuid_id),
+            key="social_update",
         )
 
     def get_thread(self):
@@ -70,3 +92,8 @@ class News(models.Model):
 
     def get_likers(self):
         return self.liked.all()
+
+    class Meta:
+        verbose_name = "News"
+        verbose_name_plural = "News"
+        ordering = ("-timestamp",)
