@@ -36,6 +36,11 @@ jobs:
         uses: actions/setup-python@v2
         with:
           python-version: 3.10.6
+      # Install Redis
+      - name: Install redis
+        run: sudo apt-get install -y redis-tools redis-server
+      - name: Verify that redis is up
+        run: redis-cli ping
       # Update pip and install all requirements
       - name: Install Deps
         working-directory: .
@@ -71,6 +76,8 @@ jobs:
           echo CLOUDINARY_NAME='${{ secrets.CLOUDINARY_NAME }}' >> .env
           echo CLOUDINARY_API_KEY='${{ secrets.CLOUDINARY_API_KEY }}' >> .env
           echo CLOUDINARY_API_SECRET='${{ secrets.CLOUDINARY_API_SECRET }}' >> .env
+
+          echo REDIS_URL='${{ secrets.REDIS_URL }}' >> .env
         
           cat .env
           
