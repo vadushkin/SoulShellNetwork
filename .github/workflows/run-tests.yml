@@ -20,11 +20,9 @@ jobs:
           POSTGRES_NAME: ${{ secrets.POSTGRES_NAME }}
           POSTGRES_USER: ${{ secrets.POSTGRES_USER }}
           POSTGRES_PASSWORD: ${{ secrets.POSTGRES_PASSWORD }}
-          DB_HOST: ${{ secrets.DB_HOST }}
-          DB_PORT: ${{ secrets.DB_PORT }}
         # Ports
         ports:
-          - ${{ secrets.DB_PORT }}:5432
+          - 5432:5432
         # Options for PostgresSQL
         options: >-
           --health-cmd pg_isready
