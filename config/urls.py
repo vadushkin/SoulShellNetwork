@@ -11,6 +11,7 @@ urlpatterns = [
     path("messenger/", include("src.messenger.urls", namespace="messenger")),
     path("search/", include("src.search.urls", namespace="search")),
     path("articles/", include("src.articles.urls", namespace="articles")),
+    # path("notifications/", include("src.notifications.urls", namespace="notifications")),
     path("questions/", include("src.questions.urls", namespace="questions")),
     # path(r"accounts/", include("allauth.urls")),
 ]
